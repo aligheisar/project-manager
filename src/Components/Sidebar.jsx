@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GetProjects } from "../Context/ProjectContext";
+import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
+import useWindowResize from "../hooks/useWindowResize";
 import ProjectItem from "./ProjectItem";
 
 let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
-  let { projects, setCurrentProject, createProject } = GetProjects();
-
-  let [value, setValue] = useState("");
+  let { projects, createProject, currentProjectId, setCurrentProject } =
+    GetProjects();
 
   let input = useRef(null);
 
@@ -14,66 +15,65 @@ let Sidebar = () => {
     setSidebarOpen((prev) => {
       if (prev) {
         input.current.blur();
-        setValue("");
+        input.current.value = "";
       } else input.current.focus();
       return !prev;
     });
 
-  useEffect(() => {
-    let windowResizeFunc = () => {
-      if (window.innerWidth > 1024) setSidebarOpen(false);
-    };
-    let keydownFunc = (e) => {
-      if (sidebarOpen && e.key === "Escape") {
-        setSidebarOpen(false);
-        input.current.blur();
-        setValue("");
-      }
-      if (e.key.toLowerCase() === "s" && e.ctrlKey) {
-        e.preventDefault();
-        toggleSidebar();
-      }
-    };
-    /// fix later !!!!!
-    let clickFunc = (e) => {
-      if (sidebarOpen) {
-        if (e.target.className.includes("backdrop-elem")) {
-          setSidebarOpen(false);
-        }
-      }
-    };
-    window.addEventListener("resize", windowResizeFunc);
-    document.addEventListener("keydown", keydownFunc);
-    document.addEventListener("click", clickFunc);
-    return () => {
-      window.removeEventListener("resize", windowResizeFunc);
-      document.removeEventListener("keydown", keydownFunc);
-      document.removeEventListener("click", clickFunc);
-    };
-  }, [sidebarOpen]);
+  let closeSidebar = (clear = false) => {
+    setSidebarOpen(false);
+    if (clear) {
+      input.current.blur();
+      input.current.value = "";
+    }
+  };
 
   let closeOnSmallView = () =>
-    window.innerWidth < 420 ? setSidebarOpen(false) : null;
+    window.innerWidth < 420 ? closeSidebar(true) : null;
 
   let handleAddNewProject = () => {
+    let { value } = input.current;
+
     if (!value.trim()) {
-      setValue("");
+      input.current.value = "";
       input.current.focus();
       return;
     }
     createProject({ name: value });
-    setValue("");
+    input.current.value = "";
     closeOnSmallView();
   };
 
-  let SwitchProject = (id) => {
+  let switchProject = (id) => {
     setCurrentProject(id);
     closeOnSmallView();
   };
 
+  let handleInputKeyDown = (e) => {
+    if (e.keyCode === 13) handleAddNewProject();
+  };
+
+  useWindowResize(() => {
+    if (window.innerWidth > 1024) setSidebarOpen(false);
+  });
+
+  useKeybordShortcuts({
+    Escape: () => {
+      if (sidebarOpen) closeSidebar(true);
+    },
+    "Ctrl+s": () => {
+      if (window.innerWidth < 1024) toggleSidebar();
+    },
+  });
+
   return (
     <>
-      {sidebarOpen && <div className="backdrop-elem fixed inset-0 z-40"></div>}
+      {sidebarOpen && (
+        <div
+          onClick={closeSidebar}
+          className="backdrop-elem fixed inset-0 z-40"
+        ></div>
+      )}
       <aside
         className={`sidebar box-shadow z-50 flex h-full w-[370px] shrink-0 flex-col gap-4 rounded-e-2xl bg-gray-600/80 px-5 py-8 text-black backdrop-blur-lg backdrop-filter transition-all duration-300 max-lg:absolute max-sm:w-[350px] max-sm:px-3 max-vsm:w-full max-vsm:rounded-none max-vsm:pt-11 ${
           sidebarOpen
@@ -97,9 +97,7 @@ let Sidebar = () => {
             className="border-2 border-gray-700 bg-gray-100 px-2 py-1 outline-none placeholder:transition-colors placeholder:duration-100 focus-within:placeholder:text-gray-700"
             type="text"
             placeholder="Project Name"
-            value={value}
-            onKeyDown={(e) => (e.keyCode === 13 ? handleAddNewProject() : null)}
-            onChange={(e) => setValue(e.currentTarget.value)}
+            onKeyDown={handleInputKeyDown}
           />
           <button
             onClick={handleAddNewProject}
@@ -112,8 +110,8 @@ let Sidebar = () => {
           <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
             {projects.map((proj) => (
               <ProjectItem
-                active={proj.id === setCurrentProject}
-                onClick={() => SwitchProject(proj.id)}
+                active={proj.id === currentProjectId}
+                onClick={() => switchProject(proj.id)}
                 key={proj.id}
                 project={proj}
               />

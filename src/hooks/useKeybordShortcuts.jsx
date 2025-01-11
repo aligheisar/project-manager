@@ -3,7 +3,7 @@ import { useEffect } from "react";
 let useKeybordShortcuts = (handlers) => {
   useEffect(() => {
     let handleKeyDown = (e) => {
-      let keyCombo = `${e.ctrlKey ? "ctrl+" : ""}${e.shiftKey ? "Shift+" : ""}${e.key}`;
+      let keyCombo = `${e.ctrlKey ? "Ctrl+" : ""}${e.shiftKey ? "Shift+" : ""}${e.key}`;
       if (handlers[keyCombo]) {
         e.preventDefault();
         handlers[keyCombo]();
