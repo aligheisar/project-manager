@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { GetContext } from "../Context/Context";
+import { GetProjects } from "../Context/ProjectContext";
 import ProjectItem from "./ProjectItem";
 
 let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
-  let { getProjects, setCurrentProj, currentProj, makeNewProject } =
-    GetContext();
-
-  let projects = getProjects();
+  let { projects, setCurrentProject, createProject } = GetProjects();
 
   let [value, setValue] = useState("");
 
@@ -37,6 +34,7 @@ let Sidebar = () => {
         toggleSidebar();
       }
     };
+    /// fix later !!!!!
     let clickFunc = (e) => {
       if (sidebarOpen) {
         if (e.target.className.includes("backdrop-elem")) {
@@ -54,20 +52,23 @@ let Sidebar = () => {
     };
   }, [sidebarOpen]);
 
+  let closeOnSmallView = () =>
+    window.innerWidth < 420 ? setSidebarOpen(false) : null;
+
   let handleAddNewProject = () => {
     if (!value.trim()) {
       setValue("");
       input.current.focus();
       return;
     }
-    makeNewProject({ name: value });
+    createProject({ name: value });
     setValue("");
-    if (window.innerWidth < 420) setSidebarOpen(false);
+    closeOnSmallView();
   };
 
-  let handleSwitchProj = (id) => {
-    setCurrentProj(id);
-    if (window.innerWidth < 420) setSidebarOpen(false);
+  let SwitchProject = (id) => {
+    setCurrentProject(id);
+    closeOnSmallView();
   };
 
   return (
@@ -95,7 +96,7 @@ let Sidebar = () => {
             ref={input}
             className="border-2 border-gray-700 bg-gray-100 px-2 py-1 outline-none placeholder:transition-colors placeholder:duration-100 focus-within:placeholder:text-gray-700"
             type="text"
-            placeholder="Title"
+            placeholder="Project Name"
             value={value}
             onKeyDown={(e) => (e.keyCode === 13 ? handleAddNewProject() : null)}
             onChange={(e) => setValue(e.currentTarget.value)}
@@ -111,8 +112,8 @@ let Sidebar = () => {
           <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
             {projects.map((proj) => (
               <ProjectItem
-                active={proj.id === currentProj}
-                onClick={() => handleSwitchProj(proj.id)}
+                active={proj.id === setCurrentProject}
+                onClick={() => SwitchProject(proj.id)}
                 key={proj.id}
                 project={proj}
               />
