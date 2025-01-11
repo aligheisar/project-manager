@@ -1,0 +1,130 @@
+{
+  "users": [
+    {
+      "id": "4e5f",
+      "name": "ali",
+      "username": "aliii",
+      "email": "a.gheisar.sh@gmail.com",
+      "password": "123",
+      "confirm": "1234"
+    },
+    {
+      "id": "b6d1",
+      "name": "reza",
+      "username": "reaaaa",
+      "email": "reza@gamil.com",
+      "password": "4444",
+      "confirm": "76666"
+    },
+    {
+      "id": "0d00",
+      "name": "hamid",
+      "username": "hamid.reza",
+      "email": "hamid@gmail.com",
+      "password": "999",
+      "confirm": "999"
+    }
+  ],
+  "books": [
+    {
+      "id": "e2d6e4bf-f4b3-4bc3-8a1c-d0c1b8372b4f",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "price": 10.99,
+      "rating": 4.7,
+      "publishedYear": 1925,
+      "stock": 12
+    },
+    {
+      "id": "a3f8c8b1-8dfd-4427-bbaf-90c40b23b78e",
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Dystopian",
+      "price": 8.99,
+      "rating": 4.8,
+      "publishedYear": 1949,
+      "stock": 8
+    },
+    {
+      "id": "b4d8e1e4-814f-482a-bb70-c6fb2b12a60e",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "price": 7.99,
+      "rating": 4.9,
+      "publishedYear": 1960,
+      "stock": 15
+    },
+    {
+      "id": "c6a1b68e-27d8-4b5a-9853-295bf3270f71",
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "genre": "Fiction",
+      "price": 9.49,
+      "rating": 4.5,
+      "publishedYear": 1951,
+      "stock": 20
+    },
+    {
+      "id": "d8c5e0ba-92de-414f-88d7-6a92890b6ecf",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "price": 6.99,
+      "rating": 4.6,
+      "publishedYear": 1813,
+      "stock": 10
+    },
+    {
+      "id": "e6b9d6c2-72f4-4943-a853-0b3b7337c157",
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "genre": "Dystopian",
+      "price": 7.49,
+      "rating": 4.4,
+      "publishedYear": 1932,
+      "stock": 5
+    },
+    {
+      "id": "f7c8e4d9-a89d-419d-b6cb-42a2cb13c3b4",
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "genre": "Adventure",
+      "price": 11.99,
+      "rating": 4.2,
+      "publishedYear": 1851,
+      "stock": 6
+    },
+    {
+      "id": "g8d7c3e9-739e-47da-a8e6-94c9a3e126d4",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "price": 10.49,
+      "rating": 4.8,
+      "publishedYear": 1937,
+      "stock": 18
+    },
+    {
+      "id": "h9e8f4a1-b29c-4b4c-a123-7e2a09b184af",
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "genre": "Historical",
+      "price": 14.99,
+      "rating": 4.7,
+      "publishedYear": 1869,
+      "stock": 7
+    },
+    {
+      "id": "i1a2b3c4-d5e6-47f7-890a-123456789abc",
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "genre": "Philosophical",
+      "price": 9.99,
+      "rating": 4.9,
+      "publishedYear": 1866,
+      "stock": 4
+    }
+  ]
+}
