@@ -14,7 +14,7 @@ let OverlayRenderer = () => {
     openProjectSwitcher,
     closeOverlay,
   } = GetOverlay();
-  let { projectsLenght } = GetProjects();
+  let { projectsLength } = GetProjects();
 
   let body = document.body;
 
@@ -44,7 +44,7 @@ let OverlayRenderer = () => {
           <InputModal onClose={closeOverlay} {...overlay.props} />,
           body,
         )}
-      {projectsLenght > 0 &&
+      {projectsLength > 0 &&
         overlay.type === "ConfirmModal" &&
         createPortal(
           <ConfirmModal onClose={closeOverlay} {...overlay.props} />,

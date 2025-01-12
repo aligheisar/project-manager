@@ -26,17 +26,15 @@ export default function ProjectProvider({ children }) {
     },
   ]);
   let [currentProjectId, setCurrentProjectId] = useState(
-    //keep this curefull !!!!!
     () => projects?.[0]?.id ?? null,
   );
 
-  // static values
   let firstProjectId = projects?.[0]?.id;
-  let projectsLenght = projects.length;
+  let projectsLength = projects.length;
 
   useEffect(() => {
     setCurrentProjectId(firstProjectId);
-  }, [firstProjectId, projectsLenght]);
+  }, [firstProjectId, projectsLength]);
 
   let createProject = ({ name, desc = "" }) => {
     setProjects((prevState) => [
@@ -78,12 +76,12 @@ export default function ProjectProvider({ children }) {
   };
 
   let switchProjectByIndex = (index) => {
-    if (index < projectsLenght) setCurrentProjectId(projects?.[index]?.id);
+    if (index < projectsLength) setCurrentProjectId(projects?.[index]?.id);
   };
 
   let value = {
     projects,
-    projectsLenght,
+    projectsLength,
     currentProjectId,
     getCurrentProject,
     getProjectIndex,

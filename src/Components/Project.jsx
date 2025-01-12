@@ -8,7 +8,7 @@ import { GetProjects } from "../Context/ProjectContext";
 import { GetOverlay } from "../Context/OverlayContext";
 
 let Project = () => {
-  let { getCurrentProject, editProject, projectLenght } = GetProjects();
+  let { getCurrentProject, editProject, projectsLength } = GetProjects();
   let { openConfirmModal } = GetOverlay();
   let currentProj = getCurrentProject();
 
@@ -135,7 +135,7 @@ let Project = () => {
           <Todos todos={currentProj.todos} />
         </>
       ) : (
-        projectLenght < 1 && <NoProject />
+        projectsLength === 0 && <NoProject />
       )}
     </section>
   );
