@@ -1,14 +1,16 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
-import { GetContext } from "../Context/Context";
 import { formatHeader } from "../util/formater";
 import { Trash } from "./Icons";
 import NoProject from "./NoProject";
 import Todos from "./Todos";
 import AddTodo from "./AddTodo";
+import { GetProjects } from "../Context/ProjectContext";
+import { GetOverlay } from "../Context/OverlayContext";
 
 let Project = () => {
-  let { getCurrentProj, openConfirmModal, dataLen, renameProj } = GetContext();
-  let currentProj = getCurrentProj();
+  let { getCurrentProject, editProject, projectLenght } = GetProjects();
+  let { openConfirmModal } = GetOverlay();
+  let currentProj = getCurrentProject();
 
   let [editMode, setEditMode] = useState({ state: false, elem: null });
 
@@ -19,14 +21,14 @@ let Project = () => {
     if (editMode.elem === "name") {
       let value = nameInput.current.value.trim();
       if (value) {
-        renameProj({ elem: "name", value });
+        editProject({ elem: "name", value });
       }
     } else if (editMode.elem === "desc") {
       let value = descInput.current.value.trim();
-      renameProj({ elem: "desc", value });
+      editProject({ elem: "desc", value });
     }
     setEditMode({ state: false, elem: null });
-  }, [editMode.elem, renameProj]);
+  }, [editMode.elem, editProject]);
 
   useEffect(() => {
     if (editMode.state && editMode.elem === "name") nameInput.current.focus();
@@ -133,7 +135,7 @@ let Project = () => {
           <Todos todos={currentProj.todos} />
         </>
       ) : (
-        !dataLen && <NoProject />
+        projectLenght < 1 && <NoProject />
       )}
     </section>
   );

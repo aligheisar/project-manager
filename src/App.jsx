@@ -5,7 +5,7 @@ let App = () => {
   return (
     <main className="flex h-dvh items-center bg-gray-900">
       <Sidebar />
-      {/* <Project /> */}
+      <Project />
     </main>
   );
 };

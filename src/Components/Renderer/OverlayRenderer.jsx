@@ -7,24 +7,24 @@ import useKeybordShortcuts from "../../hooks/useKeybordShortcuts";
 import { GetProjects } from "../../Context/ProjectContext";
 
 let OverlayRenderer = () => {
-  let { overlay, openOverlay, closeOverlay } = GetOverlay();
   let {
-    projects,
-    createProject,
-    deleteProject,
-    getProjectIndex,
-    switchProjectByIndex,
-  } = GetProjects();
+    overlay,
+    openInputModal,
+    openConfirmModal,
+    openProjectSwitcher,
+    closeOverlay,
+  } = GetOverlay();
+  let { projectsLenght } = GetProjects();
 
   let body = document.body;
 
   useKeybordShortcuts({
     "Ctrl+e": {
-      func: () => openOverlay("InputModal", { onAccept: createProject }),
+      func: () => openInputModal(),
       prevent: true,
     },
     "Ctrl+d": {
-      func: () => openOverlay("ConfirmModal", { onAccept: deleteProject }),
+      func: () => openConfirmModal(),
       prevent: true,
     },
     "Shift+Tab": {
@@ -32,11 +32,7 @@ let OverlayRenderer = () => {
         if (overlay.type === "ProjectSwitcher") return;
         e.preventDefault();
         e.stopPropagation();
-        openOverlay("ProjectSwitcher", {
-          projects,
-          switchProjectByIndex,
-          getProjectIndex,
-        });
+        openProjectSwitcher();
       },
     },
   });
@@ -48,7 +44,7 @@ let OverlayRenderer = () => {
           <InputModal onClose={closeOverlay} {...overlay.props} />,
           body,
         )}
-      {projects.length > 0 &&
+      {projectsLenght > 0 &&
         overlay.type === "ConfirmModal" &&
         createPortal(
           <ConfirmModal onClose={closeOverlay} {...overlay.props} />,

@@ -1,7 +1,7 @@
-import { GetContext } from "../Context/Context";
+import { GetOverlay } from "../Context/OverlayContext";
 
 let NoProject = () => {
-  let { openInputModal } = GetContext();
+  let { openInputModal } = GetOverlay();
 
   return (
     <>

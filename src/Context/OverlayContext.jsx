@@ -1,10 +1,19 @@
 import { createContext, useContext, useState } from "react";
+import { GetProjects } from "./ProjectContext";
 
 let overlayContext = createContext();
 
 export let GetOverlay = () => useContext(overlayContext);
 
 export default function OverlayProvider({ children }) {
+  let {
+    projects,
+    createProject,
+    deleteProject,
+    getProjectIndex,
+    switchProjectByIndex,
+  } = GetProjects();
+
   let [overlay, setOverlay] = useState({ type: null, props: {} });
 
   let openOverlay = (type, props = {}) => {
@@ -15,7 +24,29 @@ export default function OverlayProvider({ children }) {
     setOverlay({ type: null, props: {} });
   };
 
-  let value = { overlay, openOverlay, closeOverlay };
+  let openInputModal = () => {
+    openOverlay("InputModal", { onAccept: createProject });
+  };
+
+  let openConfirmModal = () => {
+    openOverlay("ConfirmModal", { onAccept: deleteProject });
+  };
+
+  let openProjectSwitcher = () => {
+    openOverlay("ProjectSwitcher", {
+      projects,
+      switchProjectByIndex,
+      getProjectIndex,
+    });
+  };
+
+  let value = {
+    overlay,
+    closeOverlay,
+    openInputModal,
+    openConfirmModal,
+    openProjectSwitcher,
+  };
   return (
     <overlayContext.Provider value={value}>{children}</overlayContext.Provider>
   );

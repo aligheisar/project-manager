@@ -15,13 +15,14 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
         let newData = { name: data.name.trim(), desc: data.desc.trim() };
         if (accept) onAccept(newData);
         setIsOpen(false);
+        onClose?.();
       };
       backdrop.current.classList.remove("active");
       setTimeout(() => {
         transtionEnd();
       }, 200);
     },
-    [data, onAccept],
+    [data, onAccept, onClose],
   );
 
   let handleDataChange = (e) => {
