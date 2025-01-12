@@ -58,11 +58,16 @@ let Sidebar = () => {
   });
 
   useKeybordShortcuts({
-    Escape: () => {
-      if (sidebarOpen) closeSidebar(true);
+    Escape: {
+      func: () => {
+        if (sidebarOpen) closeSidebar(true);
+      },
     },
-    "Ctrl+s": () => {
-      if (window.innerWidth < 1024) toggleSidebar();
+    "Ctrl+s": {
+      func: () => {
+        if (window.innerWidth < 1024) toggleSidebar();
+      },
+      prevent: true,
     },
   });
 

@@ -1,12 +1,21 @@
 import { useEffect } from "react";
 
-let useKeybordShortcuts = (handlers) => {
+let useKeybordShortcuts = (shortcuts) => {
   useEffect(() => {
     let handleKeyDown = (e) => {
-      let keyCombo = `${e.ctrlKey ? "Ctrl+" : ""}${e.shiftKey ? "Shift+" : ""}${e.key}`;
-      if (handlers[keyCombo]) {
-        e.preventDefault();
-        handlers[keyCombo]();
+      let keyCombination = [];
+      if (e.ctrlKey) keyCombination.push("Ctrl");
+      if (e.shiftKey) keyCombination.push("Shift");
+      if (e.altKey) keyCombination.push("Alt");
+      keyCombination.push(e.key);
+
+      let combination = keyCombination.join("+");
+      let shortcut = shortcuts[combination];
+
+      if (shortcut) {
+        if (shortcut.prevent) e.preventDefault();
+        if (shortcut.stopGrow) e.stopPropagation();
+        shortcut.func(e);
       }
     };
 
@@ -14,7 +23,7 @@ let useKeybordShortcuts = (handlers) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handlers]);
+  }, [shortcuts]);
 };
 
 export default useKeybordShortcuts;

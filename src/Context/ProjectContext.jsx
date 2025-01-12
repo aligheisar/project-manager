@@ -77,11 +77,17 @@ export default function ProjectProvider({ children }) {
     return projects.findIndex((i) => i.id === currentProjectId);
   };
 
+  let switchProjectByIndex = (index) => {
+    if (index < projectsLenght) setCurrentProjectId(projects?.[index]?.id);
+  };
+
   let value = {
     projects,
     projectsLenght,
     currentProjectId,
     getCurrentProject,
+    getProjectIndex,
+    switchProjectByIndex,
     setCurrentProject: setCurrentProjectId,
     createProject,
     deleteProject,

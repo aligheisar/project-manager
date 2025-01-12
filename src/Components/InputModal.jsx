@@ -53,7 +53,7 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
   }, [onOpen]);
 
   useKeybordShortcuts({
-    Escape: closeModal,
+    Escape: { func: () => closeModal() },
   });
 
   if (!isOpen) return null;

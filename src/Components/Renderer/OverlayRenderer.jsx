@@ -8,13 +8,37 @@ import { GetProjects } from "../../Context/ProjectContext";
 
 let OverlayRenderer = () => {
   let { overlay, openOverlay, closeOverlay } = GetOverlay();
-  let { createProject, deleteProject } = GetProjects();
+  let {
+    projects,
+    createProject,
+    deleteProject,
+    getProjectIndex,
+    switchProjectByIndex,
+  } = GetProjects();
 
   let body = document.body;
 
   useKeybordShortcuts({
-    "Ctrl+e": () => openOverlay("InputModal", { onAccept: createProject }),
-    "Ctrl+d": () => openOverlay("ConfirmModal", { onAccept: deleteProject }),
+    "Ctrl+e": {
+      func: () => openOverlay("InputModal", { onAccept: createProject }),
+      prevent: true,
+    },
+    "Ctrl+d": {
+      func: () => openOverlay("ConfirmModal", { onAccept: deleteProject }),
+      prevent: true,
+    },
+    "Shift+Tab": {
+      func: (e) => {
+        if (overlay.type === "ProjectSwitcher") return;
+        e.preventDefault();
+        e.stopPropagation();
+        openOverlay("ProjectSwitcher", {
+          projects,
+          switchProjectByIndex,
+          getProjectIndex,
+        });
+      },
+    },
   });
 
   return (
@@ -24,7 +48,8 @@ let OverlayRenderer = () => {
           <InputModal onClose={closeOverlay} {...overlay.props} />,
           body,
         )}
-      {overlay.type === "ConfirmModal" &&
+      {projects.length > 0 &&
+        overlay.type === "ConfirmModal" &&
         createPortal(
           <ConfirmModal onClose={closeOverlay} {...overlay.props} />,
           body,

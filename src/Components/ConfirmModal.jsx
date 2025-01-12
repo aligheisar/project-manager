@@ -23,11 +23,12 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   );
 
   useKeybordShortcuts({
-    Escape: closeModal,
-    Enter: () => closeModal(true),
+    Escape: { func: () => closeModal() },
+    Enter: { func: () => closeModal(true) },
   });
 
   useEffect(() => {
+    
     onOpen?.();
     setTimeout(() => backdrop?.current?.classList.add("active"));
   }, [onOpen]);
