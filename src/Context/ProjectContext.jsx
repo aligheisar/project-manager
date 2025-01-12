@@ -31,6 +31,10 @@ export default function ProjectProvider({ children }) {
 
   let firstProjectId = projects?.[0]?.id;
   let projectsLength = projects.length;
+  let currentProject = projects.find((i) => i.id === currentProjectId) || null;
+  let currentProjectIndex = projects.findIndex(
+    (i) => i.id === currentProjectId,
+  );
 
   useEffect(() => {
     setCurrentProjectId(firstProjectId);
@@ -59,20 +63,12 @@ export default function ProjectProvider({ children }) {
     );
   };
 
-  let getCurrentProject = () => {
-    return projects.find((i) => i.id === currentProjectId) || null;
-  };
-
   let editProject = ({ elem, value }) => {
     setProjects((prevState) =>
       prevState.map((i) =>
         i.id === currentProjectId ? { ...i, [elem]: value } : i,
       ),
     );
-  };
-
-  let getProjectIndex = () => {
-    return projects.findIndex((i) => i.id === currentProjectId);
   };
 
   let switchProjectByIndex = (index) => {
@@ -82,9 +78,9 @@ export default function ProjectProvider({ children }) {
   let value = {
     projects,
     projectsLength,
+    currentProject,
     currentProjectId,
-    getCurrentProject,
-    getProjectIndex,
+    currentProjectIndex,
     switchProjectByIndex,
     setCurrentProject: setCurrentProjectId,
     createProject,

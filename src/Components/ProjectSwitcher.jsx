@@ -11,12 +11,11 @@ let ProjectSwitcher = ({
   onClose,
   projects,
   switchProjectByIndex,
-  getProjectIndex,
+  currentProjectIndex,
 }) => {
-  let currentProj = getProjectIndex();
   let projectsLength = projects.length;
 
-  let [activeItem, setActiveItem] = useState(currentProj);
+  let [activeItem, setActiveItem] = useState(currentProjectIndex);
 
   let switcher = useRef(null);
 
@@ -73,7 +72,7 @@ let ProjectSwitcher = ({
             className={`cursor-pointer rounded-sm bg-gray-100/25 px-2 py-1 text-gray-950 ${
               index === activeItem ? `bg-gray-100/45` : ""
             } ${
-              index === currentProj
+              index === currentProjectIndex
                 ? "outline outline-1 outline-offset-1 outline-sky-500"
                 : ""
             }`}

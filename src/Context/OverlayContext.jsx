@@ -10,7 +10,7 @@ export default function OverlayProvider({ children }) {
     projects,
     createProject,
     deleteProject,
-    getProjectIndex,
+    currentProjectIndex,
     switchProjectByIndex,
   } = GetProjects();
 
@@ -36,7 +36,7 @@ export default function OverlayProvider({ children }) {
     openOverlay("ProjectSwitcher", {
       projects,
       switchProjectByIndex,
-      getProjectIndex,
+      currentProjectIndex,
     });
   };
 

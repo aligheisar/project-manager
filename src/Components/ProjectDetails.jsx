@@ -5,10 +5,8 @@ import { Trash } from "./Icons";
 import { GetProjects } from "../Context/ProjectContext";
 
 let ProjectDetails = () => {
-  let { getCurrentProject, editProject } = GetProjects();
+  let { currentProject, editProject } = GetProjects();
   let { openConfirmModal } = GetOverlay();
-
-  let currentProj = getCurrentProject();
 
   let [editMode, setEditMode] = useState({ state: false, elem: null });
 
@@ -66,14 +64,14 @@ let ProjectDetails = () => {
             onBlur={() => setEditMode({ state: false, elem: null })}
             className="proj-name w-full text-pretty rounded-md border-none bg-gray-800 text-5xl font-bold leading-snug text-gray-400 outline-2 outline-offset-4 outline-gray-400 selection:bg-gray-400 selection:text-gray-800 focus:border-none max-sm:text-4xl"
             type="text"
-            defaultValue={currentProj.name}
+            defaultValue={currentProject.name}
           />
         ) : (
           <h2
             onDoubleClick={() => setEditMode({ state: true, elem: "name" })}
             className="proj-name select-none text-pretty text-5xl font-bold leading-snug text-gray-500 max-sm:text-4xl"
           >
-            {formatHeader(currentProj.name).map((item, index) => (
+            {formatHeader(currentProject.name).map((item, index) => (
               <Fragment key={index}>
                 {index === 0 ? "" : " "}
                 {item}
@@ -85,7 +83,7 @@ let ProjectDetails = () => {
           <textarea
             ref={descInput}
             onBlur={() => setEditMode({ state: false, elem: null })}
-            defaultValue={currentProj.desc}
+            defaultValue={currentProject.desc}
             className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded-md border-none bg-gray-800 text-sm text-gray-400 outline-2 outline-offset-4 outline-gray-400 selection:bg-gray-400 selection:text-gray-800"
             onKeyDown={handleInputKeydown}
           ></textarea>
@@ -93,11 +91,13 @@ let ProjectDetails = () => {
           <p
             onDoubleClick={() => setEditMode({ state: true, elem: "desc" })}
             className={`project-desc custom-scroll max-h-20 max-w-[450px] select-none overflow-y-auto text-sm opacity-70 max-vsm:w-full ${
-              currentProj.desc ? "text-gray-400" : "text-gray-600 line-through"
+              currentProject.desc
+                ? "text-gray-400"
+                : "text-gray-600 line-through"
             }`}
           >
-            {(currentProj.desc &&
-              currentProj.desc.split("\n").map((i, index) =>
+            {(currentProject.desc &&
+              currentProject.desc.split("\n").map((i, index) =>
                 index === 0 ? (
                   <Fragment key={index}>{i}</Fragment>
                 ) : (
