@@ -23,7 +23,15 @@ let OverlayRenderer = () => {
       func: () => openInputModal(),
       prevent: true,
     },
+    "Ctrl+ث": {
+      func: () => openInputModal(),
+      prevent: true,
+    },
     "Ctrl+d": {
+      func: () => openConfirmModal(),
+      prevent: true,
+    },
+    "Ctrl+ی": {
       func: () => openConfirmModal(),
       prevent: true,
     },

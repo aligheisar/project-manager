@@ -2,15 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Poppins";
+  src:
+    local("Poppins") url("./fonts/Poppins-Regular.ttf"),
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: local("Kalameh"), url("./fonts/KalamehFaNum-Regular.ttf"),
+    format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
-  /* box-sizing: border-box; */
   user-select: none;
 }
 
 body {
-  font-family: poppins;
+  font-family: "Poppins", "Kalameh";
   overflow: hidden;
   background-color: rgb(17 24 39);
 }
