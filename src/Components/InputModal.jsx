@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
+import Input from "./ui/Input";
+import Button from "./ui/Button";
 
 let InputModal = ({ onClose, onOpen, onAccept }) => {
   let [isOpen, setIsOpen] = useState(true);
@@ -78,15 +80,14 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
             &#10006;
           </span>
         </section>
-        <input
+        <Input
           ref={input}
-          type="text"
           name="name"
           placeholder="Project Name"
           value={data.name}
           onChange={handleDataChange}
           onKeyDown={handleInputKeyDown}
-          className="w-[270px] border-2 border-gray-400 bg-gray-100 px-2 py-[6px] outline-none transition-colors placeholder:transition-colors placeholder:duration-100 focus-within:border-gray-600 focus-within:placeholder:text-gray-700 max-vsm:text-sm"
+          className="w-[270px]"
         />
         <textarea
           name="desc"
@@ -97,18 +98,20 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
           className="custom-scroll-area h-20 w-full resize-none rounded-[4px] border-2 border-gray-400 px-1 py-1 text-sm text-gray-700 outline-none focus-within:border-gray-600 max-vsm:hidden"
         ></textarea>
         <section className="flex w-full items-center gap-1 max-vsm:flex-col-reverse">
-          <button
+          <Button
             onClick={() => closeModal()}
-            className="w-full rounded-[4px] border-gray-800 bg-gray-100 bg-gray-800/20 bg-none px-3 py-1 text-gray-800"
+            varient="dim"
+            className="w-full"
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
+            varient="colored"
             onClick={handleAccept}
-            className="w-full rounded-[4px] bg-gray-700 px-3 py-1 text-gray-200"
+            className="w-full"
           >
             Add
-          </button>
+          </Button>
         </section>
       </section>
     </div>

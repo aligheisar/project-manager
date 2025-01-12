@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { formatHeader } from "../util/formater";
 
-let ProjectName = ({ editProject, name }) => {
+let ProjectName = ({ editProject, value: name }) => {
   let [editMode, setEditMode] = useState(false);
 
   let nameInput = useRef(null);

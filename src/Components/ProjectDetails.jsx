@@ -1,79 +1,32 @@
-import { Fragment, useRef, useState } from "react";
-import { GetOverlay } from "../Context/OverlayContext";
-import { Trash } from "./Icons";
 import { GetProjects } from "../Context/ProjectContext";
+import { GetOverlay } from "../Context/OverlayContext";
 import ProjectName from "./ProjectName";
+import ProjectDescription from "./ProjectDescription";
+import Button from "./ui/Button";
+import { Trash } from "./Icons";
 
 let ProjectDetails = () => {
   let { currentProject, editProject } = GetProjects();
   let { openConfirmModal } = GetOverlay();
 
-  // let [editMode, setEditMode] = useState({ state: false, elem: null });
-
-  // let descInput = useRef(null);
-
-  // useEffect(() => {
-  //   if (editMode.state && editMode.elem === "name") nameInput.current.focus();
-  //   else if (editMode.state && editMode.elem === "desc")
-  //     descInput.current.focus();
-
-  //   let clickFunc = (e) => {
-  //     if (editMode.state) {
-  //       if (e.target === nameInput.current || e.target === descInput.current)
-  //         return;
-  //       handleRenameProj();
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", clickFunc);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", clickFunc);
-  //   };
-  // }, [editMode, handleRenameProj]);
-
   return (
     <div className="project-details flex items-start justify-between gap-3 max-sm:flex-col max-sm:items-center max-sm:text-center">
       <div className="name_desc flex w-full max-w-[750px] flex-1 flex-col justify-between gap-3 max-sm:items-center">
-        <ProjectName editProject={editProject} name={currentProject.name} />
-        {/* {editMode.state && editMode.elem === "desc" ? (
-          <textarea
-            ref={descInput}
-            onBlur={() => setEditMode({ state: false, elem: null })}
-            defaultValue={currentProject.desc}
-            className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded-md border-none bg-gray-800 text-sm text-gray-400 outline-2 outline-offset-4 outline-gray-400 selection:bg-gray-400 selection:text-gray-800"
-            // onKeyDown={handleInputKeydown}
-          ></textarea>
-        ) : (
-          <p
-            onDoubleClick={() => setEditMode({ state: true, elem: "desc" })}
-            className={`project-desc custom-scroll max-h-20 max-w-[450px] select-none overflow-y-auto text-sm opacity-70 max-vsm:w-full ${
-              currentProject.desc
-                ? "text-gray-400"
-                : "text-gray-600 line-through"
-            }`}
-          >
-            {(currentProject.desc &&
-              currentProject.desc.split("\n").map((i, index) =>
-                index === 0 ? (
-                  <Fragment key={index}>{i}</Fragment>
-                ) : (
-                  <Fragment key={index}>
-                    <br />
-                    {i}
-                  </Fragment>
-                ),
-              )) ||
-              "No Description"}
-          </p>
-        )} */}
+        <ProjectName editProject={editProject} value={currentProject.name} />
+        <ProjectDescription
+          editProject={editProject}
+          value={currentProject.desc}
+        />
       </div>
-      <button
+      <Button
+        dark
+        varient="danger"
         onClick={openConfirmModal}
-        className="mt-2 flex items-center gap-2 rounded-[4px] bg-gray-800 fill-gray-300 px-3 py-[6px] text-gray-300 shadow-md shadow-black/5 outline-none transition-colors duration-150 hover:bg-gray-700 hover:fill-red-500 hover:text-red-500 max-sm:rounded-full max-sm:px-10"
+        className="max-sm:rounded-full max-sm:px-10"
       >
-        <Trash inher /> Delete
-      </button>
+        <Trash inher />
+        Delete
+      </Button>
     </div>
   );
 };

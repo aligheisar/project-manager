@@ -3,6 +3,8 @@ import { GetProjects } from "../Context/ProjectContext";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import useWindowResize from "../hooks/useWindowResize";
 import ProjectItem from "./ProjectItem";
+import Input from "./ui/Input";
+import Button from "./ui/Button";
 
 let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
@@ -69,6 +71,12 @@ let Sidebar = () => {
       },
       prevent: true,
     },
+    "Ctrl+س": {
+      func: () => {
+        if (window.innerWidth < 1024) toggleSidebar();
+      },
+      prevent: true,
+    },
   });
 
   return (
@@ -97,19 +105,17 @@ let Sidebar = () => {
           {sidebarOpen ? <>&#10006;</> : <>&#9776;</>}
         </span>
         <section className="flex flex-col gap-1">
-          <input
+          <Input
             ref={input}
-            className="border-2 border-gray-700 bg-gray-100 px-2 py-1 outline-none placeholder:transition-colors placeholder:duration-100 focus-within:placeholder:text-gray-700"
             type="text"
             placeholder="Project Name"
             onKeyDown={handleInputKeyDown}
           />
-          <button
+          <Button
             onClick={handleAddNewProject}
-            className="rounded-[4px] bg-gray-200 py-1 font-semibold text-gray-950 shadow-md shadow-gray-700/20"
           >
             Add Project
-          </button>
+          </Button>
         </section>
         {projects && projects.length ? (
           <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
