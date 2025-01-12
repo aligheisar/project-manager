@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 
 let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   let [isOpen, setIsOpen] = useState(true);
@@ -6,13 +7,13 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   let backdrop = useRef(null);
 
   let closeModal = useCallback(
-    ({ remove }) => {
+    (remove = false) => {
       let transtionEnd = () => {
-        if (remove) onAccept();
         setIsOpen(false);
         onClose?.();
       };
 
+      if (remove) onAccept();
       backdrop.current.classList.remove("active");
       setTimeout(() => {
         transtionEnd();
@@ -20,27 +21,24 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
     },
     [onAccept, onClose],
   );
-  useEffect(() => {
-    let keypressFunc = (e) => {
-      if (e.key === "Escape") closeModal({ remove: false });
-      if (e.keyCode === 13) closeModal({ remove: true });
-    };
 
+  useKeybordShortcuts({
+    Escape: closeModal,
+    Enter: () => closeModal(true),
+  });
+
+  useEffect(() => {
     onOpen?.();
-    backdrop?.current?.classList.add("active");
-    document.addEventListener("keydown", keypressFunc);
-    return () => {
-      document.removeEventListener("keydown", keypressFunc);
-    };
-  }, [onClose, onOpen, closeModal]);
+    setTimeout(() => backdrop?.current?.classList.add("active"));
+  }, [onOpen]);
 
   if (!isOpen) return null;
 
   return (
     <div
       ref={backdrop}
-      onClick={() => closeModal({ remove: false })}
-      className="backdrop fixed left-0 top-0 z-[60] h-dvh w-dvw bg-transparent transition-color-filter"
+      onClick={() => closeModal()}
+      className="fixed left-0 top-0 z-[60] h-dvh w-dvw bg-transparent transition-color-filter"
     >
       <section
         onClick={(e) => e.stopPropagation()}
@@ -54,13 +52,13 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
         </p>
         <section className="flex w-full flex-col gap-1">
           <button
-            onClick={() => closeModal({ remove: true })}
+            onClick={() => closeModal(true)}
             className="rounded-[4px] bg-red-700/70 py-[6px] text-gray-200"
           >
             Confirm
           </button>
           <button
-            onClick={() => closeModal({ remove: false })}
+            onClick={() => closeModal()}
             className="rounded-[4px] bg-gray-400/80 py-[6px] text-gray-800"
           >
             Cancel

@@ -10,6 +10,7 @@ export default function OverlayProvider({ children }) {
   let openOverlay = (type, props = {}) => {
     setOverlay({ type, props });
   };
+
   let closeOverlay = () => {
     setOverlay({ type: null, props: {} });
   };
