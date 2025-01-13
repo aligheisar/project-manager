@@ -2,7 +2,7 @@ import { GetProjects } from "../Context/ProjectContext";
 import { GetOverlay } from "../Context/OverlayContext";
 import ProjectName from "./ProjectName";
 import ProjectDescription from "./ProjectDescription";
-import Button from "./ui/Button";
+import Button from "./ui/Button.tsx";
 import { Trash } from "./Icons";
 
 let ProjectDetails = () => {

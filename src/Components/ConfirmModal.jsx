@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
-import Button from "./ui/Button";
+import Button from "./ui/Button.tsx";
 
 let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   let [isOpen, setIsOpen] = useState(true);

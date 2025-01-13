@@ -3,13 +3,15 @@ import { GetProjects } from "../Context/ProjectContext";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import useWindowResize from "../hooks/useWindowResize";
 import ProjectItem from "./ProjectItem";
-import Input from "./ui/Input";
-import Button from "./ui/Button";
+import Input from "./ui/Input.tsx";
+import Button from "./ui/Button.tsx";
+import { GetTheme } from "../Context/ThemeContext.jsx";
 
 let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
   let { projects, createProject, currentProjectId, setCurrentProject } =
     GetProjects();
+  let { theme, changeTheme } = GetTheme();
 
   let input = useRef(null);
 
@@ -111,11 +113,7 @@ let Sidebar = () => {
             placeholder="Project Name"
             onKeyDown={handleInputKeyDown}
           />
-          <Button
-            onClick={handleAddNewProject}
-          >
-            Add Project
-          </Button>
+          <Button onClick={handleAddNewProject}>Add Project</Button>
         </section>
         {projects && projects.length ? (
           <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
@@ -133,6 +131,27 @@ let Sidebar = () => {
             <p className="-translate-y-16 text-lg text-gray-950">No Project</p>
           </section>
         )}
+        <h1>{theme}</h1>
+        <section className="flex gap-1">
+          <button
+            className="flex-1 rounded-sm bg-lime-200"
+            onClick={() => changeTheme("light")}
+          >
+            Light
+          </button>
+          <button
+            className="flex-1 rounded-sm bg-lime-200"
+            onClick={() => changeTheme("dark")}
+          >
+            Dark
+          </button>
+          <button
+            className="flex-1 rounded-sm bg-lime-200"
+            onClick={() => changeTheme("system")}
+          >
+            System
+          </button>
+        </section>
       </aside>
     </>
   );
