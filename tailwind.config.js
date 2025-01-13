@@ -30,7 +30,8 @@ module.exports = {
         "color-postions":
           "background, background-color, color, translate, top, bottom, left, right",
         "color-filter": "filter, backdrop-filter, background-color, color",
-        "colors-shadow": "color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow"
+        "colors-shadow": "color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow",
+        "border": "border-color"
       },
     },
   },
