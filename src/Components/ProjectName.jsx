@@ -26,14 +26,14 @@ let ProjectName = ({ editProject, value: name }) => {
       ref={nameInput}
       onKeyDown={handleKeydown}
       onBlur={() => setEditMode(false)}
-      className="proj-name w-full text-pretty rounded-md border-none bg-gray-800 text-5xl font-bold leading-snug text-gray-400 outline-2 outline-offset-4 outline-gray-400 selection:bg-gray-400 selection:text-gray-800 focus:border-none max-sm:text-4xl"
+      className="proj-name w-[min(570px,100%)] text-pretty rounded border-none bg-transparent text-5xl font-bold leading-snug text-primary outline-2 outline-offset-4 outline-border selection:bg-primary selection:text-background-color focus:border-none max-sm:rounded-sm max-sm:text-center max-sm:text-4xl"
       type="text"
       defaultValue={name}
     />
   ) : (
     <h2
       onDoubleClick={() => setEditMode(true)}
-      className="proj-name select-none text-pretty text-5xl font-bold leading-snug text-gray-500 max-sm:text-4xl"
+      className="proj-name select-none text-pretty text-5xl font-bold leading-snug text-primary max-sm:text-4xl"
     >
       {formatHeader(name).map((item, index) => (
         <Fragment key={index}>

@@ -25,14 +25,14 @@ let ProjectDescription = ({ editProject, value: desc }) => {
       ref={descInput}
       onBlur={() => setEditMode(false)}
       defaultValue={desc}
-      className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded-md border-none bg-gray-800 text-sm text-gray-400 outline-2 outline-offset-4 outline-gray-400 selection:bg-gray-400 selection:text-gray-800"
+      className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded border-none bg-transparent text-sm text-muted outline-2 outline-offset-4 outline-border selection:bg-muted selection:text-background-color max-sm:rounded-sm max-sm:text-center"
       onKeyDown={handleKeydown}
     ></textarea>
   ) : (
     <p
       onDoubleClick={() => setEditMode(true)}
-      className={`project-desc custom-scroll max-h-20 max-w-[450px] select-none overflow-y-auto text-sm opacity-70 max-vsm:w-full ${
-        desc ? "text-gray-400" : "text-gray-600 line-through"
+      className={`project-desc custom-scroll max-h-20 max-w-[450px] select-none overflow-y-auto text-sm max-vsm:w-full ${
+        desc ? "text-muted" : "text-muted/40 line-through"
       }`}
     >
       {(desc &&

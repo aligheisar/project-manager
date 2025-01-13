@@ -3,7 +3,7 @@ import Project from "./Components/Project";
 
 let App = () => {
   return (
-    <main className="bg-surface flex h-dvh items-center">
+    <main className="flex h-dvh items-center bg-background-color">
       <Sidebar />
       <Project />
     </main>

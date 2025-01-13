@@ -75,7 +75,7 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
           <h2 className="text-lg max-vsm:text-base">Add new Project</h2>
           <span
             onClick={() => closeModal()}
-            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[4px] transition-colors duration-200 hover:bg-gray-200 max-vsm:hidden"
+            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors duration-200 hover:bg-gray-200 max-vsm:hidden"
           >
             &#10006;
           </span>
@@ -95,7 +95,7 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
           value={data.desc}
           onChange={handleDataChange}
           onKeyDown={handleInputKeyDown}
-          className="custom-scroll-area h-20 w-full resize-none rounded-[4px] border-2 border-gray-400 px-1 py-1 text-sm text-gray-700 outline-none focus-within:border-gray-600 max-vsm:hidden"
+          className="custom-scroll-area h-20 w-full resize-none rounded border-2 border-gray-400 px-1 py-1 text-sm text-gray-700 outline-none focus-within:border-gray-600 max-vsm:hidden"
         ></textarea>
         <section className="flex w-full items-center gap-1 max-vsm:flex-col-reverse">
           <Button onClick={() => closeModal()} varient="dim" className="w-full">

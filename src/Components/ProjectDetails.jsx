@@ -19,12 +19,11 @@ let ProjectDetails = () => {
         />
       </div>
       <Button
-        dark
-        varient="danger"
         onClick={openConfirmModal}
-        className="max-sm:rounded-full max-sm:px-10"
+        varient="outlined"
+        Icon={<Trash inher />}
+        className="mt-2 fill-current text-error hover:bg-error/5 active:bg-error/10 max-sm:rounded-full max-sm:pl-8 max-sm:pr-10"
       >
-        <Trash inher />
         Delete
       </Button>
     </div>
