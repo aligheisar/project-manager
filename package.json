@@ -20,6 +20,7 @@
     "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
     "tailwindcss": "^3.4.17",
+    "tailwindcss-color-mix": "^0.0.9",
     "uuid": "^11.0.4",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"

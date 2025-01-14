@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -14,6 +15,7 @@ module.exports = {
         "on-secondary": "rgb(var(--on-secondary) / <alpha-value>)",
         "background-color": "rgb(var(--background) / <alpha-value>)",
         surface: "rgb(var(--surface) / <alpha-value>)",
+        "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
         "text-color": "rgb(var(--text) / <alpha-value>)",
         border: "rgb(var(--border) / <alpha-value>)",
         "border-hover": "rgb(var(--border-hover) / <alpha-value>)",

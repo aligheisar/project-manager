@@ -14,6 +14,7 @@
     --on-secondary: 78 82 85;
     --background: 236 236 236;
     --surface: 198 198 198;
+    --on-surface: 188 188 188;
     --text: 33 37 41;
     --border: 90 102 114;
     --border-hover: 81 92 103;
@@ -36,6 +37,7 @@
       --on-secondary: 219 225 231;
       --background: 18 18 18;
       --surface: 30 30 30;
+      --on-surface: 40 40 40;
       --text: 233 236 239;
       --border: 90 102 114;
       --border-hover: 112 126 140;

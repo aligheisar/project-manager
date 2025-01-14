@@ -17,7 +17,7 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>(
       filled:
         "bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active",
       outlined:
-        "border border-1 bg-white/0 border-border text-primary hover:bg-white/5 hover:border-border-hover active:bg-white/10 active:border-border-active",
+        "border border-1 bg-text-color/0 border-border text-primary hover:bg-text-color/5 hover:border-border-hover active:bg-text-color/10 active:border-border-active",
       tonal:
         "bg-secondary text-on-secondary hover:bg-secondary-hover hover:shadow-md active:bg-secondary-active active:shadow-none",
     };

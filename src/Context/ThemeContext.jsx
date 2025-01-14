@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useLayoutEffect, useState } from "react";
 
 let themeContext = createContext();
 
@@ -9,7 +9,7 @@ export default function ThemeProvider({ children }) {
     () => localStorage.getItem("theme") ?? "system",
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let darkMode =
       theme === "system"
         ? window.matchMedia("(prefers-color-scheme: dark)").matches

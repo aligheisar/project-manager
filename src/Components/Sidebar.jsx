@@ -11,7 +11,7 @@ let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
   let {
     projects,
-    projectLength,
+    projectsLength,
     createProject,
     currentProjectId,
     setCurrentProject,
@@ -73,20 +73,15 @@ let Sidebar = () => {
       {sidebarOpen && <Backdrop onClose={closeSidebar} className="z-40" />}
       <aside
         //!!!
-        className={`sidebar box-shadow z-50 flex h-full w-[370px] shrink-0 flex-col gap-4 rounded-e-2xl bg-surface px-5 py-8 backdrop-blur-lg backdrop-filter transition-all duration-300 max-lg:absolute max-sm:w-[350px] max-sm:px-3 max-vsm:w-full max-vsm:rounded-none max-vsm:pt-11 ${
+        className={`sidebar box-shadow z-50 flex h-full w-[370px] shrink-0 flex-col gap-4 rounded-e-2xl bg-surface px-5 py-8 backdrop-blur-lg transition-all duration-300 max-lg:absolute max-sm:w-[350px] max-sm:px-3 max-vsm:w-full max-vsm:rounded-none max-vsm:pt-11 ${
           sidebarOpen
-            ? "left-0"
+            ? "left-0 bg-surface/80"
             : "-left-[370px] max-sm:-left-[350px] max-vsm:-left-full"
         }`}
       >
         <span
           onClick={toggleSidebar}
-          //!!!
-          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface pl-2 py-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:right-3 max-vsm:top-2 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:bg-gray-100/0 max-vsm:p-0 max-vsm:backdrop-filter-none max-vsm:hover:bg-gray-100/20 lg:hidden ${
-            !sidebarOpen
-              ? "max-vsm:bg-whtie/60 max-vsm:-right-10 max-vsm:font-bold max-vsm:text-text-color max-vsm:hover:bg-white/80"
-              : "max-vsm:left-auto"
-          }`}
+          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface py-2 pl-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:p-0 lg:hidden ${sidebarOpen ? "max-vsm:left-auto max-vsm:right-3 max-vsm:top-2 max-vsm:bg-text-color/0 max-vsm:hover:bg-text-color/10" : "max-vsm:hover:bg-on-surface max-vsm:right-auto max-vsm:top-2 max-vsm:ml-2 max-vsm:shadow-md"}`}
         >
           {sidebarOpen ? <>&#10006;</> : <>&#9776;</>}
         </span>
@@ -95,7 +90,7 @@ let Sidebar = () => {
           createProject={createProject}
           closeOnSmallView={closeOnSmallView}
         />
-        {projects && projectLength > 0 ? (
+        {projects && projectsLength > 0 ? (
           <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
             {projects.map((proj) => (
               <ProjectItem
