@@ -44,19 +44,23 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
     >
       <section
         onClick={(e) => e.stopPropagation()}
-        className="modal font- fixed left-1/2 top-1/2 flex w-full max-w-80 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-md bg-gray-200/85 px-2 py-2 pt-4 shadow-lg transition-all duration-200 max-vsm:max-w-64"
+        className="modal fixed left-1/2 top-1/2 flex w-full max-w-80 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-md bg-background-color px-2 py-2 pt-4 shadow-lg transition-all duration-200 max-vsm:max-w-64"
       >
-        <h2 className="text-2xl font-medium text-gray-800 max-vsm:text-xl">
+        <h2 className="text-2xl font-medium text-text-color max-vsm:text-xl">
           Are you sure ?
         </h2>
-        <p className="max-w-[70%] text-center text-sm font-normal text-gray-600 max-vsm:max-w-[90%]">
+        <p className="max-w-[70%] text-center text-sm font-normal text-muted max-vsm:max-w-[90%]">
           if you were confirm this popUp the project will delete.
         </p>
         <section className="flex w-full flex-col gap-1">
-          <Button onClick={() => closeModal(true)} varient="delete">
+          <Button
+            onClick={() => closeModal(true)}
+            varient="filled"
+            className="bg-error/85 hover:bg-error/95 active:bg-error/100"
+          >
             Confirm
           </Button>
-          <Button onClick={() => closeModal()} varient="dim">
+          <Button onClick={() => closeModal()} varient="tonal">
             Cancel
           </Button>
         </section>

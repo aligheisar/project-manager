@@ -8,10 +8,11 @@
     --primary-hover: 18 132 255;
     --primary-active: 0 108 224;
     --on-primary: 214 234 255;
-    --secondary: 219 225 231;
-    --secondary-hover: 202 220 237;
-    --secondary-active: 182 197 211;
-    --on-secondary: 78 82 85;
+  /* !!! */
+    --secondary: 212 215 218;
+    --secondary-hover: 209 214 219;
+    --secondary-active: 196 201 206;
+    --on-secondary: 63 66 68;
     --background: 236 236 236;
     --surface: 198 198 198;
     --on-surface: 188 188 188;
@@ -31,10 +32,10 @@
       --primary-hover: 182 213 245;
       --primary-active: 179 202 227;
       --on-primary: 0 123 255;
-      --secondary: 78 82 85;
-      --secondary-hover: 104 110 115;
-      --secondary-active: 65 68 71;
-      --on-secondary: 219 225 231;
+      --secondary: 63 66 68;
+      --secondary-hover: 55 58 59;
+      --secondary-active: 43 45 46;
+      --on-secondary: 212 215 218;
       --background: 18 18 18;
       --surface: 30 30 30;
       --on-surface: 40 40 40;
@@ -185,7 +186,7 @@ aside .custom-scroll::-webkit-scrollbar {
     padding-block: 1.5rem;
     gap: 1rem;
 
-    & > :nth-child(2) {
+    &> :nth-child(2) {
       flex-direction: column;
     }
   }

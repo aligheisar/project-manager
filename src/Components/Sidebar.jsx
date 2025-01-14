@@ -81,7 +81,7 @@ let Sidebar = () => {
       >
         <span
           onClick={toggleSidebar}
-          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface py-2 pl-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:p-0 lg:hidden ${sidebarOpen ? "max-vsm:left-auto max-vsm:right-3 max-vsm:top-2 max-vsm:bg-text-color/0 max-vsm:hover:bg-text-color/10" : "max-vsm:hover:bg-on-surface max-vsm:right-auto max-vsm:top-2 max-vsm:ml-2 max-vsm:shadow-md"}`}
+          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface py-2 pl-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:p-0 lg:hidden ${sidebarOpen ? "bg-surface/80 max-vsm:left-auto max-vsm:right-3 max-vsm:top-2 max-vsm:bg-text-color/0 max-vsm:hover:bg-text-color/10" : "max-vsm:hover:bg-on-surface max-vsm:right-auto max-vsm:top-2 max-vsm:ml-2 max-vsm:shadow-md"}`}
         >
           {sidebarOpen ? <>&#10006;</> : <>&#9776;</>}
         </span>
