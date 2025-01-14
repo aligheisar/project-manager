@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import Button from "./ui/Button.tsx";
+import Backdrop from "./Backdrop.jsx";
 
 let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   let [isOpen, setIsOpen] = useState(true);
@@ -36,10 +37,10 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   if (!isOpen) return null;
 
   return (
-    <div
+    <Backdrop
       ref={backdrop}
-      onClick={() => closeModal()}
-      className="fixed left-0 top-0 z-[60] h-dvh w-dvw bg-transparent transition-color-filter"
+      onClose={closeModal}
+      className="z-[60] bg-transparent transition-color-filter"
     >
       <section
         onClick={(e) => e.stopPropagation()}
@@ -60,7 +61,7 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
           </Button>
         </section>
       </section>
-    </div>
+    </Backdrop>
   );
 };
 

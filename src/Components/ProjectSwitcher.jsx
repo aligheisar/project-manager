@@ -10,11 +10,10 @@ import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 let ProjectSwitcher = ({
   onClose,
   projects,
+  projectsLength,
   switchProjectByIndex,
   currentProjectIndex,
 }) => {
-  let projectsLength = projects.length;
-
   let [activeItem, setActiveItem] = useState(currentProjectIndex);
 
   let switcher = useRef(null);

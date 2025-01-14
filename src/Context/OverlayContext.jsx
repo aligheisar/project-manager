@@ -8,6 +8,7 @@ export let GetOverlay = () => useContext(overlayContext);
 export default function OverlayProvider({ children }) {
   let {
     projects,
+    projectsLength,
     createProject,
     deleteProject,
     currentProjectIndex,
@@ -35,6 +36,7 @@ export default function OverlayProvider({ children }) {
   let openProjectSwitcher = () => {
     openOverlay("ProjectSwitcher", {
       projects,
+      projectsLength,
       switchProjectByIndex,
       currentProjectIndex,
     });

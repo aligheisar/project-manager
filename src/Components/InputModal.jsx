@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
+import Backdrop from "./Backdrop.jsx";
 import Input from "./ui/Input.tsx";
 import Button from "./ui/Button.tsx";
 
@@ -62,10 +63,10 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
   if (!isOpen) return null;
 
   return (
-    <div
+    <Backdrop
       ref={backdrop}
-      onClick={() => closeModal()}
-      className="fixed left-0 top-0 z-[60] h-dvh w-dvw bg-transparent transition-color-filter"
+      onClose={closeModal}
+      className="z-[60] bg-transparent transition-color-filter"
     >
       <section
         onClick={(e) => e.stopPropagation()}
@@ -106,7 +107,7 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
           </Button>
         </section>
       </section>
-    </div>
+    </Backdrop>
   );
 };
 
