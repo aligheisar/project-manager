@@ -1,21 +1,13 @@
 import { useRef, useState } from "react";
-import { GetProjects } from "../Context/ProjectContext";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import useWindowResize from "../hooks/useWindowResize";
+import ProjectList from "./ProjectList.jsx";
 import AddProject from "./AddProject.jsx";
-import ProjectItem from "./ProjectItem";
 import ThemeChanger from "./ThemeChanger";
 import Backdrop from "./Backdrop.jsx";
 
 let Sidebar = () => {
   let [sidebarOpen, setSidebarOpen] = useState(false);
-  let {
-    projects,
-    projectsLength,
-    createProject,
-    currentProjectId,
-    setCurrentProject,
-  } = GetProjects();
 
   let input = useRef(null);
 
@@ -38,11 +30,6 @@ let Sidebar = () => {
 
   let closeOnSmallView = () =>
     window.innerWidth < 420 ? closeSidebar(true) : null;
-
-  let switchProject = (id) => {
-    setCurrentProject(id);
-    closeOnSmallView();
-  };
 
   useWindowResize(() => {
     if (window.innerWidth > 1024) setSidebarOpen(false);
@@ -81,29 +68,12 @@ let Sidebar = () => {
       >
         <span
           onClick={toggleSidebar}
-          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface py-2 pl-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:p-0 lg:hidden ${sidebarOpen ? "bg-surface/80 max-vsm:left-auto max-vsm:right-3 max-vsm:top-2 max-vsm:bg-text-color/0 max-vsm:hover:bg-text-color/10" : "max-vsm:hover:bg-on-surface max-vsm:right-auto max-vsm:top-2 max-vsm:ml-2 max-vsm:shadow-md"}`}
+          className={`absolute left-[calc(100%-1px)] cursor-pointer rounded-e-full bg-surface py-2 pl-2 pr-[14px] text-lg text-text-color transition-color-postions duration-200 max-vsm:flex max-vsm:h-7 max-vsm:w-7 max-vsm:items-center max-vsm:justify-center max-vsm:rounded max-vsm:p-0 lg:hidden ${sidebarOpen ? "bg-surface/80 max-vsm:left-auto max-vsm:right-3 max-vsm:top-2 max-vsm:bg-text-color/0 max-vsm:hover:bg-text-color/10" : "max-vsm:right-auto max-vsm:top-2 max-vsm:ml-2 max-vsm:shadow-md max-vsm:hover:bg-on-surface"}`}
         >
           {sidebarOpen ? <>&#10006;</> : <>&#9776;</>}
         </span>
-        <AddProject
-          ref={input}
-          createProject={createProject}
-          closeOnSmallView={closeOnSmallView}
-        />
-        {projects && projectsLength > 0 ? (
-          <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
-            {projects.map((proj) => (
-              <ProjectItem
-                active={proj.id === currentProjectId}
-                onClick={() => switchProject(proj.id)}
-                key={proj.id}
-                project={proj}
-              />
-            ))}
-          </section>
-        ) : (
-          <NoProject />
-        )}
+        <AddProject ref={input} closeOnSmallView={closeOnSmallView} />
+        <ProjectList closeOnSmallView={closeOnSmallView} />
         <ThemeChanger />
       </aside>
     </>
@@ -111,11 +81,3 @@ let Sidebar = () => {
 };
 
 export default Sidebar;
-
-let NoProject = () => {
-  return (
-    <section className="flex h-full w-full items-center justify-center">
-      <p className="-translate-y-16 text-lg text-text-color">No Project</p>
-    </section>
-  );
-};
