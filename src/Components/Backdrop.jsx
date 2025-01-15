@@ -6,10 +6,7 @@ let Backdrop = forwardRef(({ children, onClose, className, ...props }, ref) => {
     <div
       ref={ref}
       onClick={() => onClose?.()}
-      className={clsx(
-        "fixed inset-0",
-        className,
-      )}
+      className={clsx("fixed inset-0", className)}
       {...props}
     >
       {children}

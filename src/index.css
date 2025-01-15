@@ -8,7 +8,7 @@
     --primary-hover: 18 132 255;
     --primary-active: 0 108 224;
     --on-primary: 214 234 255;
-  /* !!! */
+    /* !!! */
     --secondary: 212 215 218;
     --secondary-hover: 209 214 219;
     --secondary-active: 196 201 206;
@@ -94,10 +94,6 @@ input {
   100% {
     opacity: 1;
   }
-}
-
-aside .custom-scroll::-webkit-scrollbar {
-  background-color: rgb(var(--background) / 0.7);
 }
 
 .custom-scroll::-webkit-scrollbar {
@@ -186,7 +182,7 @@ aside .custom-scroll::-webkit-scrollbar {
     padding-block: 1.5rem;
     gap: 1rem;
 
-    &> :nth-child(2) {
+    & > :nth-child(2) {
       flex-direction: column;
     }
   }

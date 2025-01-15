@@ -1,8 +1,11 @@
 import { forwardRef } from "react";
 import Button from "./ui/Button.tsx";
 import Input from "./ui/Input.tsx";
+import { GetProjects } from "../Context/ProjectContext.jsx";
 
-let AddProject = forwardRef(({ createProject, closeOnSmallView }, ref) => {
+let AddProject = forwardRef(({ closeOnSmallView }, ref) => {
+  let { createProject } = GetProjects();
+
   let handleAddNewProject = () => {
     let { value } = ref.current;
 
