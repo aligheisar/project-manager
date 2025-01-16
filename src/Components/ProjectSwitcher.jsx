@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
+import Backdrop from "./Backdrop";
 
 let ProjectSwitcher = ({
   onClose,
@@ -17,10 +18,35 @@ let ProjectSwitcher = ({
   let [activeItem, setActiveItem] = useState(currentProjectIndex);
 
   let switcher = useRef(null);
+  let isMount = useRef(false);
 
   let selectNext = useCallback(() => {
     setActiveItem((prev) => (prev === projectsLength - 1 ? 0 : prev + 1));
   }, [projectsLength]);
+
+  let calcScroll = useCallback(
+    (smooth) => {
+      let _eachItem = 32;
+      let _gap = 4;
+      switcher.current.scrollTo({
+        top: Math.max((_eachItem + _gap) * (activeItem - 1), 0),
+        behavior: smooth === true ? "smooth" : "instant",
+      });
+    },
+    [activeItem],
+  );
+
+  let close = useCallback(
+    (skip = false, index) => {
+      if (!skip) {
+        if (index >= 0) {
+          switchProjectByIndex(index);
+        } else switchProjectByIndex(activeItem);
+      }
+      onClose();
+    },
+    [activeItem, onClose, switchProjectByIndex],
+  );
 
   useLayoutEffect(() => {
     selectNext();
@@ -37,52 +63,52 @@ let ProjectSwitcher = ({
   });
 
   useEffect(() => {
+    if (!isMount.current) {
+      calcScroll(false);
+      isMount.current = true;
+    }
+  }, [calcScroll]);
+
+  useEffect(() => {
     let keyupFunc = (e) => {
       if (e.key === "Shift") {
-        switchProjectByIndex(activeItem);
-        onClose();
+        close();
       }
     };
 
-    let calcScroll = () => {
-      let _eachItem = 32;
-      let _gap = 4;
-      switcher.current.scrollTo({
-        top: Math.max((_eachItem + _gap) * (activeItem - 1), 0),
-        behavior: "smooth",
-      });
-    };
-
-    calcScroll();
+    calcScroll(true);
     document.addEventListener("keyup", keyupFunc);
     return () => {
       document.removeEventListener("keyup", keyupFunc);
     };
-  }, [activeItem, onClose, switchProjectByIndex]);
+  }, [activeItem, calcScroll, close]);
   return (
-    <section
-      ref={switcher}
-      className="custom-scroll-mini fixed left-1/2 top-4 z-[60] mx-[10px] flex max-h-[min(188px,calc(100%-25px))] w-[calc(100%-10px)] max-w-80 -translate-x-[calc(50%+10px)] flex-col gap-1 overflow-y-auto rounded-md border-2 border-gray-400 bg-gray-600/50 px-1 py-1 shadow-lg backdrop-blur-md"
-    >
-      {projectsLength ? (
-        projects.map((i, index) => (
-          <div
-            key={i.id}
-            className={`cursor-pointer rounded-sm bg-gray-100/25 px-2 py-1 text-gray-950 ${
-              index === activeItem ? `bg-gray-100/45` : ""
-            } ${
-              index === currentProjectIndex
-                ? "outline outline-1 outline-offset-1 outline-sky-500"
-                : ""
-            }`}
-          >
-            {i.name}
-          </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-400">You got no Project</p>
-      )}
-    </section>
+    <Backdrop onClick={() => close(true)}>
+      <section
+        ref={switcher}
+        className="custom-scroll-mini fixed left-1/2 top-4 z-[60] mx-[10px] flex max-h-[min(188px,calc(100%-25px))] w-[calc(100%-10px)] max-w-80 -translate-x-[calc(50%+10px)] flex-col gap-1 overflow-y-auto rounded-md border-2 border-border bg-surface/60 px-1 py-1 shadow-lg backdrop-blur-md"
+      >
+        {projectsLength ? (
+          projects.map((i, index) => (
+            <div
+              key={i.id}
+              onClick={() => close(false, index)}
+              className={`cursor-pointer rounded-sm bg-on-secondary/20 px-2 py-1 text-text-color hover:bg-on-secondary/25 ${
+                index === activeItem ? `bg-on-secondary/35` : ""
+              } ${
+                index === currentProjectIndex
+                  ? "outline outline-1 outline-offset-1 outline-sky-500"
+                  : ""
+              }`}
+            >
+              {i.name}
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-text-color">You got no Project</p>
+        )}
+      </section>
+    </Backdrop>
   );
 };
 

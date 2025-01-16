@@ -17,7 +17,7 @@ let Input = forwardRef<HTMLInputElement, InputProps>(
       filled:
         "border-transparent bg-secondary placeholder:text-on-secondary border-b-2 focus-within:border-primary",
       outlined:
-        "border border-border placeholder:text-text-color bg-transparent focus-within:border-primary",
+        "border border-border/60 placeholder:text-text-color bg-transparent focus-within:border-primary",
     };
 
     let classes = cn([

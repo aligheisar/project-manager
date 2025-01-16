@@ -18,8 +18,6 @@ module.exports = {
         "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
         "text-color": "rgb(var(--text) / <alpha-value>)",
         border: "rgb(var(--border) / <alpha-value>)",
-        "border-hover": "rgb(var(--border-hover) / <alpha-value>)",
-        "border-active": "rgb(var(--border-active) / <alpha-value>)",
         muted: "rgb(var(--muted) / <alpha-value>)",
         success: "rgb(var(--success) / <alpha-value>)",
         warning: "rgb(var(--warning) / <alpha-value>)",
