@@ -24,14 +24,37 @@ let ProjectSwitcher = ({
     setActiveItem((prev) => (prev === projectsLength - 1 ? 0 : prev + 1));
   }, [projectsLength]);
 
+  let selectPrev = useCallback(() => {
+    setActiveItem((prev) => (prev === 0 ? projectsLength - 1 : prev - 1));
+  }, [projectsLength]);
+
   let calcScroll = useCallback(
     (smooth) => {
       let _eachItem = 32;
       let _gap = 4;
-      switcher.current.scrollTo({
-        top: Math.max((_eachItem + _gap) * (activeItem - 1), 0),
-        behavior: smooth === true ? "smooth" : "instant",
-      });
+
+      let scrollTo = (smooth, value) => {
+        switcher.current.scrollTo({
+          top: value,
+          behavior: smooth === true ? "smooth" : "instant",
+        });
+      };
+
+      let orZero = (value) => Math.max(value, 0);
+
+      let calcTop = Math.max((_eachItem + _gap) * (activeItem - 1), 0);
+      let calcT = orZero((_eachItem + _gap) * (activeItem - 4));
+      let calcB = orZero((_eachItem + _gap) * activeItem);
+
+      let { scrollTop } = switcher.current;
+
+      if (calcTop - scrollTop > 108) {
+        scrollTo(smooth, calcT);
+      } else if (calcTop - scrollTop < -36) {
+        scrollTo(smooth, calcB);
+      } else if (calcTop === 0) {
+        scrollTo(smooth, 0);
+      }
     },
     [activeItem],
   );
@@ -58,6 +81,20 @@ let ProjectSwitcher = ({
         e.preventDefault();
         e.stopPropagation();
         selectNext();
+      },
+    },
+    "Shift+40": {
+      func: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectNext();
+      },
+    },
+    "Shift+38": {
+      func: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectPrev();
       },
     },
   });
@@ -97,7 +134,7 @@ let ProjectSwitcher = ({
                 index === activeItem ? `bg-on-secondary/35` : ""
               } ${
                 index === currentProjectIndex
-                  ? "outline outline-1 outline-offset-1 outline-sky-500"
+                  ? "outline outline-2 outline-offset-1 outline-primary"
                   : ""
               }`}
             >
