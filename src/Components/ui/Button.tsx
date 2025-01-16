@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import React, { forwardRef, ReactNode } from "react";
+import { cn } from "../../util/cn.ts";
 
 type ButtonVarient = "filled" | "outlined" | "tonal";
 
@@ -17,16 +17,16 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>(
       filled:
         "bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active",
       outlined:
-        "border border-1 bg-text-color/0 border-border text-primary hover:bg-text-color/5 hover:border-border-hover active:bg-text-color/10 active:border-border-active",
+        "border bg-text-color/0 border-border text-primary hover:bg-text-color/5 hover:border-border-hover active:bg-text-color/10 active:border-border-active",
       tonal:
         "bg-secondary text-on-secondary hover:bg-secondary-hover hover:shadow-md active:bg-secondary-active active:shadow-none",
     };
 
-    let classes = clsx(
+    let classes = cn([
       baseClasses,
       varientClasses[varient || "filled"],
       className,
-    );
+    ]);
 
     return (
       <button ref={ref} {...props} className={classes}>

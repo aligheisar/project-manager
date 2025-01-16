@@ -7,7 +7,7 @@ import { GetProjects } from "../Context/ProjectContext";
 let Project = () => {
   let { currentProject, projectsLength } = GetProjects();
   return (
-    <section className="project-container custom-scroll mx-auto flex h-full w-3/4 flex-col overflow-x-hidden bg-background-color max-lg:w-full">
+    <section className="project-container custom-scroll mx-auto flex h-full w-3/4 flex-col overflow-x-hidden bg-background-color transition-colors max-lg:w-full">
       {currentProject ? (
         <>
           <section className="todo_details-container flex flex-col gap-6 px-7 py-11 pb-4 max-sm:px-4 max-sm:py-6 max-vsm:px-3">

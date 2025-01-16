@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import clsx from "clsx";
+import { cn } from "../../util/cn.ts";
 
 type InputVarient = "filled" | "outlined";
 
@@ -17,14 +17,15 @@ let Input = forwardRef<HTMLInputElement, InputProps>(
       filled:
         "border-transparent bg-secondary placeholder:text-on-secondary border-b-2 focus-within:border-primary",
       outlined:
-        "border-[1px] border-border placeholder:text-text-color bg-transparent focus-within:border-primary",
+        "border border-border placeholder:text-text-color bg-transparent focus-within:border-primary",
     };
 
-    let classes = clsx(
+    let classes = cn([
       baseClasses,
       varientClasses[varient || "filled"],
       className,
-    );
+    ]);
+
     return <input ref={ref} className={classes} {...props} />;
   },
 );
