@@ -5,6 +5,7 @@ let ProjectName = ({ editProject, value: name }) => {
   let [editMode, setEditMode] = useState(false);
 
   let nameInput = useRef(null);
+  let lastTime = useRef(0);
 
   let renameProject = () => {
     let value = nameInput.current.value.trim();
@@ -17,6 +18,15 @@ let ProjectName = ({ editProject, value: name }) => {
     else if (e.keyCode === 13) renameProject();
   };
 
+  let handleDuobleClick = (e) => {
+    e.preventDefault();
+    let now = new Date();
+    if (now - lastTime.current < 300) {
+      setEditMode(true);
+    }
+    lastTime.current = now;
+  };
+
   useEffect(() => {
     if (editMode) nameInput.current.focus();
   }, [editMode]);
@@ -25,14 +35,14 @@ let ProjectName = ({ editProject, value: name }) => {
     <input
       ref={nameInput}
       onKeyDown={handleKeydown}
-      onBlur={() => setEditMode(false)}
+      onBlur={() => renameProject()}
       className="proj-name w-[min(570px,100%)] text-pretty rounded border-none bg-transparent text-5xl font-bold leading-snug text-primary outline-2 outline-offset-4 outline-border selection:bg-primary selection:text-background-color focus:border-none max-sm:rounded-sm max-sm:text-center max-sm:text-4xl"
       type="text"
       defaultValue={name}
     />
   ) : (
     <h2
-      onDoubleClick={() => setEditMode(true)}
+      onPointerDown={handleDuobleClick}
       className="proj-name select-none text-pretty text-5xl font-bold leading-snug text-primary max-sm:text-4xl"
     >
       {formatHeader(name).map((item, index) => (
