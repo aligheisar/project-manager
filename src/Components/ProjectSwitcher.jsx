@@ -7,6 +7,8 @@ import {
 } from "react";
 import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import Backdrop from "./Backdrop";
+import ProjectSwitcherList from "./ProjectSwitcherList";
+import useScroll from "../hooks/useScroll";
 
 let ProjectSwitcher = ({
   onClose,
@@ -28,37 +30,6 @@ let ProjectSwitcher = ({
     setActiveItem((prev) => (prev === 0 ? projectsLength - 1 : prev - 1));
   }, [projectsLength]);
 
-  let calcScroll = useCallback(
-    (smooth) => {
-      let _eachItem = 32;
-      let _gap = 4;
-
-      let scrollTo = (smooth, value) => {
-        switcher.current.scrollTo({
-          top: value,
-          behavior: smooth === true ? "smooth" : "instant",
-        });
-      };
-
-      let orZero = (value) => Math.max(value, 0);
-
-      let calcTop = Math.max((_eachItem + _gap) * (activeItem - 1), 0);
-      let calcT = orZero((_eachItem + _gap) * (activeItem - 4));
-      let calcB = orZero((_eachItem + _gap) * activeItem);
-
-      let { scrollTop } = switcher.current;
-
-      if (calcTop - scrollTop > 108) {
-        scrollTo(smooth, calcT);
-      } else if (calcTop - scrollTop < -36) {
-        scrollTo(smooth, calcB);
-      } else if (calcTop === 0) {
-        scrollTo(smooth, 0);
-      }
-    },
-    [activeItem],
-  );
-
   let close = useCallback(
     (skip = false, index) => {
       if (!skip) {
@@ -70,6 +41,8 @@ let ProjectSwitcher = ({
     },
     [activeItem, onClose, switchProjectByIndex],
   );
+
+  let calcScroll = useScroll(switcher, activeItem);
 
   useLayoutEffect(() => {
     selectNext();
@@ -119,6 +92,7 @@ let ProjectSwitcher = ({
       document.removeEventListener("keyup", keyupFunc);
     };
   }, [activeItem, calcScroll, close]);
+
   return (
     <Backdrop onClick={() => close(true)}>
       <section
@@ -126,21 +100,12 @@ let ProjectSwitcher = ({
         className="custom-scroll-mini fixed left-1/2 top-4 z-[60] mx-[10px] flex max-h-[min(188px,calc(100%-25px))] w-[calc(100%-10px)] max-w-80 -translate-x-[calc(50%+10px)] flex-col gap-1 overflow-y-auto rounded-md border-2 border-border bg-surface/60 px-1 py-1 shadow-lg backdrop-blur-md"
       >
         {projectsLength ? (
-          projects.map((i, index) => (
-            <div
-              key={i.id}
-              onClick={() => close(false, index)}
-              className={`cursor-pointer rounded-sm bg-on-secondary/20 px-2 py-1 text-text-color hover:bg-on-secondary/25 ${
-                index === activeItem ? `bg-on-secondary/35` : ""
-              } ${
-                index === currentProjectIndex
-                  ? "outline outline-2 outline-offset-1 outline-primary"
-                  : ""
-              }`}
-            >
-              {i.name}
-            </div>
-          ))
+          <ProjectSwitcherList
+            projects={projects}
+            activeItem={activeItem}
+            currentProjectIndex={currentProjectIndex}
+            close={close}
+          />
         ) : (
           <p className="text-center text-text-color">You got no Project</p>
         )}
