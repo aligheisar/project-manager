@@ -10,7 +10,9 @@ let ProjectItem = ({ project, onClick, active }) => {
           : "bg-background-color/50 hover:bg-background-color/70"
       } rounded-sm px-2 py-2`}
     >
-      <h3 className="text-pretty text-xl text-text-color">
+      <h3
+        className={`text-pretty text-xl ${active ? "text-primary" : "text-text-color"}`}
+      >
         {shortText(project.name, 29)}
       </h3>
       {project?.desc ? (
