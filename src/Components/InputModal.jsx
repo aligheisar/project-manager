@@ -3,6 +3,7 @@ import useKeybordShortcuts from "../hooks/useKeybordShortcuts";
 import Backdrop from "./Backdrop.jsx";
 import Input from "./ui/Input.tsx";
 import Button from "./ui/Button.tsx";
+import TextArea from "./ui/TextArea.tsx";
 
 let InputModal = ({ onClose, onOpen, onAccept }) => {
   let [isOpen, setIsOpen] = useState(true);
@@ -57,7 +58,7 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
   }, [onOpen]);
 
   useKeybordShortcuts({
-    "27": { func: () => closeModal() },
+    27: { func: () => closeModal() },
   });
 
   if (!isOpen) return null;
@@ -70,39 +71,47 @@ let InputModal = ({ onClose, onOpen, onAccept }) => {
     >
       <section
         onClick={(e) => e.stopPropagation()}
-        className="modal fixed left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-md bg-gray-200/85 px-4 py-4 pt-3 shadow-lg transition-all max-vsm:gap-[6px] max-vsm:px-2 max-vsm:py-3"
+        className="modal fixed left-1/2 top-1/2 flex w-full max-w-[19rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-xl bg-background-color px-3 pb-3 pt-[14px] shadow-lg transition-all max-vsm:max-w-64 max-vsm:gap-[14px]"
       >
-        <section className="flex w-full items-center justify-between text-gray-900 max-vsm:justify-center">
-          <h2 className="text-lg max-vsm:text-base">Add new Project</h2>
+        <section className="flex w-full items-center justify-between text-text-color max-vsm:justify-center">
+          <h2 className="text-lg">Add new Project</h2>
           <span
             onClick={() => closeModal()}
-            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded transition-colors duration-200 hover:bg-gray-200 max-vsm:hidden"
+            className="flex h-7 w-7 cursor-pointer items-center justify-center rounded transition-colors duration-200 hover:bg-text-color/10 max-vsm:hidden"
           >
             &#10006;
           </span>
         </section>
-        <Input
-          ref={input}
-          name="name"
-          placeholder="Project Name"
-          value={data.name}
-          onChange={handleDataChange}
-          onKeyDown={handleInputKeyDown}
-          className="w-[270px]"
-        />
-        <textarea
-          name="desc"
-          placeholder="Enter description (optional)"
-          value={data.desc}
-          onChange={handleDataChange}
-          onKeyDown={handleInputKeyDown}
-          className="custom-scroll-area h-20 w-full resize-none rounded border-2 border-gray-400 px-1 py-1 text-sm text-gray-700 outline-none focus-within:border-gray-600 max-vsm:hidden"
-        ></textarea>
+        <section className="flex w-full flex-col gap-[6px]">
+          <Input
+            ref={input}
+            name="name"
+            placeholder="Project Name"
+            value={data.name}
+            onChange={handleDataChange}
+            onKeyDown={handleInputKeyDown}
+            varient="outlined"
+            className="w-full"
+          />
+          <TextArea
+            name="desc"
+            placeholder="Enter description (optional)"
+            value={data.desc}
+            onChange={handleDataChange}
+            onKeyDown={handleInputKeyDown}
+            varient="outlined"
+            className="max-vsm:hidden"
+          ></TextArea>
+        </section>
         <section className="flex w-full items-center gap-1 max-vsm:flex-col-reverse">
-          <Button onClick={() => closeModal()} varient="dim" className="w-full">
+          <Button
+            onClick={() => closeModal()}
+            varient="tonal"
+            className="w-full"
+          >
             Cancel
           </Button>
-          <Button varient="colored" onClick={handleAccept} className="w-full">
+          <Button onClick={handleAccept} className="w-full">
             Add
           </Button>
         </section>

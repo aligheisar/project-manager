@@ -25,8 +25,8 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   );
 
   useKeybordShortcuts({
-    "27": { func: () => closeModal() },
-    "13": { func: () => closeModal(true) },
+    27: { func: () => closeModal() },
+    13: { func: () => closeModal(true) },
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
     >
       <section
         onClick={(e) => e.stopPropagation()}
-        className="modal fixed left-1/2 top-1/2 flex w-full max-w-80 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-md bg-background-color px-2 py-2 pt-4 shadow-lg transition-all duration-200 max-vsm:max-w-64"
+        className="modal fixed left-1/2 top-1/2 flex w-full max-w-80 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[18px] rounded-xl bg-background-color px-3 pb-3 pt-6 shadow-lg transition-all duration-200 max-vsm:max-w-64"
       >
         <h2 className="text-2xl font-medium text-text-color max-vsm:text-xl">
           Are you sure ?
@@ -56,7 +56,7 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
           <Button
             onClick={() => closeModal(true)}
             varient="filled"
-            className="bg-error/85 hover:bg-error/95 active:bg-error/100"
+            className="bg-error/85 text-text-color hover:bg-error/90 active:bg-error/100"
           >
             Confirm
           </Button>
