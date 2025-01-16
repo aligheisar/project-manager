@@ -19,23 +19,15 @@ let OverlayRenderer = () => {
   let body = document.body;
 
   useKeybordShortcuts({
-    "Ctrl+e": {
+    "Ctrl+69": {
       func: () => openInputModal(),
       prevent: true,
     },
-    "Ctrl+ث": {
-      func: () => openInputModal(),
-      prevent: true,
-    },
-    "Ctrl+d": {
+    "Ctrl+68": {
       func: () => openConfirmModal(),
       prevent: true,
     },
-    "Ctrl+ی": {
-      func: () => openConfirmModal(),
-      prevent: true,
-    },
-    "Shift+Tab": {
+    "Shift+9": {
       func: (e) => {
         if (overlay.type === "ProjectSwitcher") return;
         e.preventDefault();

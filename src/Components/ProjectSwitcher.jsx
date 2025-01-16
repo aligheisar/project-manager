@@ -27,7 +27,7 @@ let ProjectSwitcher = ({
   }, [selectNext]);
 
   useKeybordShortcuts({
-    "Shift+Tab": {
+    "Shift+9": {
       func: (e) => {
         e.preventDefault();
         e.stopPropagation();

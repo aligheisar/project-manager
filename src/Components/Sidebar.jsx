@@ -36,18 +36,12 @@ let Sidebar = () => {
   });
 
   useKeybordShortcuts({
-    Escape: {
+    27: {
       func: () => {
         if (sidebarOpen) closeSidebar(true);
       },
     },
-    "Ctrl+s": {
-      func: () => {
-        if (window.innerWidth < 1024) toggleSidebar();
-      },
-      prevent: true,
-    },
-    "Ctrl+س": {
+    "Ctrl+83": {
       func: () => {
         if (window.innerWidth < 1024) toggleSidebar();
       },

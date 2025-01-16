@@ -7,7 +7,7 @@ let useKeybordShortcuts = (shortcuts) => {
       if (e.ctrlKey) keyCombination.push("Ctrl");
       if (e.shiftKey) keyCombination.push("Shift");
       if (e.altKey) keyCombination.push("Alt");
-      keyCombination.push(e.key);
+      keyCombination.push(e.keyCode.toString());
 
       let combination = keyCombination.join("+");
       let shortcut = shortcuts[combination];

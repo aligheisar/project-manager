@@ -25,8 +25,8 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
   );
 
   useKeybordShortcuts({
-    Escape: { func: () => closeModal() },
-    Enter: { func: () => closeModal(true) },
+    "27": { func: () => closeModal() },
+    "13": { func: () => closeModal(true) },
   });
 
   useEffect(() => {
