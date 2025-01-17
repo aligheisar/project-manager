@@ -56,7 +56,7 @@ let ConfirmModal = ({ onClose, onOpen, onAccept }) => {
           <Button
             onClick={() => closeModal(true)}
             varient="filled"
-            className="bg-error/85 text-text-color hover:bg-error/90 active:bg-error/100"
+            className="bg-error/85 text-white hover:bg-error/90 active:bg-error/100"
           >
             Confirm
           </Button>

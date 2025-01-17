@@ -22,7 +22,7 @@ let ProjectDetails = () => {
         onClick={openConfirmModal}
         varient="outlined"
         Icon={<Trash inher />}
-        className="mt-2 border-error/20 fill-current text-error hover:border-error/25 hover:bg-error/5 active:border-error/40 active:bg-error/10 max-sm:rounded-full max-sm:pl-8 max-sm:pr-10"
+        className="mt-2 border-error/25 fill-current text-error hover:border-error/30 hover:bg-error/5 active:border-error/40 active:bg-error/10 max-sm:rounded-full max-sm:pl-8 max-sm:pr-10"
       >
         Delete
       </Button>

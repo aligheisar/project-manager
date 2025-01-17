@@ -18,9 +18,9 @@
     --text: 30 30 30;
     --border: 170 170 170;
     --muted: 115 115 115;
-    --success: 40 167 69;
-    --warning: 255 193 7;
-    --error: 220 53 69;
+    --success: 76 175 80;
+    --warning: 255 202 40;
+    --error: 244 67 54;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -38,10 +38,6 @@
       --on-surface: 40 40 40;
       --text: 235 235 235;
       --border: 95 95 95;
-      --muted: 115 115 115;
-      --success: 76 175 80;
-      --warning: 255 202 40;
-      --error: 244 67 54;
     }
   }
 }
@@ -181,7 +177,7 @@ input {
     padding-block: 1.5rem;
     gap: 1rem;
 
-    & > :nth-child(2) {
+    &> :nth-child(2) {
       flex-direction: column;
     }
   }
