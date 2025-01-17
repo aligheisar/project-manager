@@ -36,7 +36,7 @@ let ProjectName = ({ editProject, value: name }) => {
       ref={nameInput}
       onKeyDown={handleKeydown}
       onBlur={() => renameProject()}
-      className="proj-name w-[min(570px,100%)] text-pretty rounded border-none bg-transparent text-5xl font-bold leading-snug text-primary outline-2 outline-offset-4 outline-border selection:bg-primary selection:text-background-color focus:border-none max-sm:rounded-sm max-sm:text-center max-sm:text-4xl"
+      className="proj-name w-[min(570px,100%)] text-pretty rounded border-none bg-transparent text-5xl font-bold leading-snug text-primary outline outline-2 outline-offset-4 outline-border selection:bg-primary selection:text-background-color focus:border-none max-sm:rounded-sm max-sm:text-center max-sm:text-4xl"
       type="text"
       defaultValue={name}
     />

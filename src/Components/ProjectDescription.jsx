@@ -35,7 +35,7 @@ let ProjectDescription = ({ editProject, value: desc }) => {
       ref={descInput}
       onBlur={renameProject}
       defaultValue={desc}
-      className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded border-none bg-transparent text-sm text-muted outline-2 outline-offset-4 outline-border selection:bg-muted selection:text-background-color max-sm:rounded-sm max-sm:text-center"
+      className="project-desc custom-scroll inline h-20 w-full max-w-[450px] resize-none overflow-y-auto rounded border-none bg-transparent text-sm text-muted outline outline-2 outline-offset-4 outline-border selection:bg-muted selection:text-background-color max-sm:rounded-sm max-sm:text-center"
       onKeyDown={handleKeydown}
     ></textarea>
   ) : (
