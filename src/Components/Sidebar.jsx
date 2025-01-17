@@ -53,7 +53,6 @@ let Sidebar = () => {
     <>
       {sidebarOpen && <Backdrop onClose={closeSidebar} className="z-40" />}
       <aside
-        //!!!
         className={`sidebar box-shadow z-50 flex h-full w-[370px] shrink-0 flex-col gap-4 rounded-e-2xl bg-surface px-5 py-8 backdrop-blur-lg transition-all duration-300 max-lg:absolute max-sm:w-[350px] max-sm:px-3 max-vsm:w-full max-vsm:rounded-none max-vsm:pt-11 ${
           sidebarOpen
             ? "left-0 bg-surface/80"
