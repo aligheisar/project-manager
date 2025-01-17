@@ -70,6 +70,20 @@ let ProjectSwitcher = ({
         selectPrev();
       },
     },
+    "Shift+36": {
+      func: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveItem(0);
+      },
+    },
+    "Shift+35": {
+      func: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveItem(projectsLength - 1);
+      },
+    },
   });
 
   useEffect(() => {
