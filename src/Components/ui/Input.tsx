@@ -15,7 +15,7 @@ let Input = forwardRef<HTMLInputElement, InputProps>(
 
     let varientClasses: Record<InputVarient, string> = {
       filled:
-        "border-transparent bg-backgroun-color placeholder:text-on-secondary border-b-2 focus-within:border-primary",
+        "border-transparent bg-background-color placeholder:text-on-secondary border-b-2 focus-within:border-primary",
       outlined:
         "border border-border/65 placeholder:text-text-color bg-transparent focus-within:border-primary",
     };
