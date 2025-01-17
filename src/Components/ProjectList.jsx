@@ -9,6 +9,7 @@ let ProjectList = ({ closeOnSmallView }) => {
     setCurrentProject(id);
     closeOnSmallView();
   };
+
   return projects && projectsLength > 0 ? (
     <section className="custom-scroll flex max-h-full flex-col gap-1 overflow-y-auto overflow-x-hidden rounded-md">
       {projects.map((proj) => (
