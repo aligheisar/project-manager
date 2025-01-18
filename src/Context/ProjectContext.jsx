@@ -14,193 +14,12 @@ export default function ProjectProvider({ children }) {
       createAt: new Date().toLocaleString(),
       todos: {
         noStatus: [
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
-          { id: uuid(), body: "klsdjsk" },
+          { id: uuid(), body: "ali" },
+          { id: uuid(), body: "hamid" },
+          { id: uuid(), body: "hamid reza" },
+          { id: uuid(), body: "gholam" },
         ],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
-        done: [],
-      },
-    },
-    {
-      id: uuid(),
-      name: "testy",
-      desc: "",
-      createAt: new Date().toLocaleString(),
-      todos: {
-        noStatus: [],
-        inProgress: [],
+        inProgress: [{ id: uuid(), body: "reza" }],
         done: [],
       },
     },
@@ -266,6 +85,86 @@ export default function ProjectProvider({ children }) {
     if (index < projectsLength) setCurrentProjectId(projects?.[index]?.id);
   };
 
+  let convertToColName = (colName) => {
+    return colName
+      .split(" ")
+      .map((i, index) =>
+        index === 0
+          ? i.toLowerCase()
+          : i
+              .split("")
+              .map((c, index) =>
+                index === 0 ? c.toUpperCase() : c.toLowerCase(),
+              )
+              .join(""),
+      )
+      .join("");
+  };
+
+  let addTodo = (value) => {
+    setProjects((prevState) =>
+      prevState.map((proj) =>
+        proj.id === currentProjectId
+          ? {
+              ...proj,
+              todos: {
+                ...proj.todos,
+                noStatus: [
+                  {
+                    id: uuid(),
+                    body: value,
+                  },
+                  ...proj.todos.noStatus,
+                ],
+              },
+            }
+          : proj,
+      ),
+    );
+  };
+
+  let deleteTodo = (colName, id) => {
+    let col = convertToColName(colName);
+
+    setProjects((prevState) =>
+      prevState.map((proj) =>
+        proj.id === currentProjectId
+          ? {
+              ...proj,
+              todos: {
+                ...proj.todos,
+                [col]: [...proj.todos[col].filter((i) => i.id !== id)],
+              },
+            }
+          : proj,
+      ),
+    );
+  };
+
+  let moveTodo = (startCol, endCol, startIndex, endIndex) => {
+    startCol = convertToColName(startCol);
+    endCol = convertToColName(endCol);
+
+    setProjects((prevState) => {
+      return prevState.map((proj) => {
+        if (proj.id === currentProjectId) {
+          let { todos } = proj;
+          let todo = todos[startCol][startIndex];
+          todos[startCol].splice(startIndex, 1);
+          todos[endCol].splice(endIndex, 0, todo);
+          console.log(todos);
+          let updatedProject = {
+            ...proj,
+            todos,
+          };
+          return updatedProject;
+        } else {
+          return proj;
+        }
+      });
+    });
+  };
+
   let value = {
     projects,
     projectsLength,
@@ -277,6 +176,9 @@ export default function ProjectProvider({ children }) {
     createProject,
     deleteProject,
     editProject,
+    addTodo,
+    deleteTodo,
+    moveTodo,
   };
   return (
     <projectContext.Provider value={value}>{children}</projectContext.Provider>
